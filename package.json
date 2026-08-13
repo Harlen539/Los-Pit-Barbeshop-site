@@ -1,0 +1,19 @@
+{
+  "name": "los-pit-platform",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["front-end", "back-end"],
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c yellow,cyan \"npm run dev -w back-end\" \"npm run dev -w front-end\"",
+    "build": "npm run build -w back-end && npm run build -w front-end",
+    "lint": "npm run lint -w back-end && npm run lint -w front-end",
+    "typecheck": "npm run typecheck -w back-end && npm run typecheck -w front-end",
+    "test": "npm run test -w back-end && npm run test -w front-end",
+    "assets": "node tools/optimize-assets.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "sharp": "0.35.3"
+  },
+  "engines": { "node": ">=20" }
+}
