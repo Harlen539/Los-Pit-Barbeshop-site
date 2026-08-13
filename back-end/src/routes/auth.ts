@@ -29,7 +29,7 @@ const recoveryLimiter = rateLimit({ ...limiterOptions, limit: 10 });
 const cookieOptions = {
   httpOnly: true,
   secure: env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
+  sameSite: env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const,
   path: '/api/auth',
   maxAge: 30 * 24 * 60 * 60_000
 };

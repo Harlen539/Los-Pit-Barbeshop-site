@@ -1,9 +1,11 @@
+import { normalizeApiBase } from './api-url';
+
 let accessToken: string | null = null;
 let refreshPromise: Promise<boolean> | null = null;
 
 export const setAccessToken = (token: string | null) => { accessToken = token; };
 
-const apiBase = import.meta.env.VITE_API_URL || '/api';
+const apiBase = normalizeApiBase(import.meta.env.VITE_API_URL);
 
 const refresh = async () => {
   if (!refreshPromise) {
