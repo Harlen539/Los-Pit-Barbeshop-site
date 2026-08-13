@@ -1583,3 +1583,106 @@ select,
 @media (max-width: 767px) {
   .gallery-heading { width: calc(100% - 28px); }
 }
+
+/* Fluxos compactos no celular */
+.preselected-professional {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -22px 0 16px;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: .72rem;
+}
+.preselected-professional svg { width: 16px; color: var(--text-primary); }
+.preselected-professional strong { margin-left: auto; color: var(--text-primary); }
+.legal-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #c1bbb1;
+  font-size: .76rem;
+  line-height: 1.55;
+}
+.legal-consent input {
+  flex: 0 0 18px;
+  width: 18px!important;
+  min-height: 18px!important;
+  margin-top: 2px;
+  accent-color: #fff;
+  cursor: pointer;
+}
+.legal-consent label,
+.legal-consent a { cursor: pointer; }
+.legal-consent a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .booking-shell { padding: 64px 0 92px; }
+  .booking-header { height: 64px; grid-template-columns: 48px 1fr 38px; padding-inline: 10px; }
+  .booking-brand img { width: 46px; height: 38px; }
+  .booking-header > button { width: 36px; height: 36px; }
+  .booking-header > button svg { width: 18px; }
+  .booking-step-title small { margin-bottom: 1px; font-size: .54rem; }
+  .booking-step-title strong { font-size: .76rem; }
+  .booking-content { width: calc(100% - 20px); padding-block: 25px; }
+  .booking-heading { margin-bottom: 21px; }
+  .booking-heading .eyebrow { font-size: .55rem; }
+  .booking-heading h1 { margin: 7px 0 8px; font-size: 1.78rem; line-height: 1.04; }
+  .booking-heading p { font-size: .73rem; line-height: 1.45; }
+  .preselected-professional { margin: -7px 0 11px; padding: 8px 10px; font-size: .65rem; }
+  .select-services { gap: 5px; }
+  .select-services > button {
+    min-height: 66px;
+    grid-template-columns: 30px minmax(0,1fr) auto;
+    gap: 7px;
+    padding: 7px 9px;
+    border-radius: 12px;
+  }
+  .selection-check { width: 29px; height: 29px; }
+  .selection-check img { width: 28px; height: 28px; }
+  .select-services h3 { font-size: .8rem; }
+  .select-services p { font-size: .59rem; }
+  .select-services small { font-size: .52rem; }
+  .select-services > button > strong { font-size: .66rem; }
+  .review-list { gap: 6px; }
+  .review-list > div { min-height: 72px; padding: 12px 14px; }
+  .review-list strong { font-size: .75rem; }
+  .review-total { margin-top: 12px; padding: 13px; }
+  .booking-footer { min-height: 82px; padding: 9px 8px calc(9px + env(safe-area-inset-bottom)); }
+  .booking-footer .button { min-height: 44px; }
+  .booking-footer.booking-footer-confirm { min-height: 76px; padding: 9px 12px calc(9px + env(safe-area-inset-bottom)); }
+  .booking-footer.booking-footer-confirm > .button:first-child { min-height: 46px; }
+  .booking-success { padding-top: 0; }
+  .success-mark { width: 56px; height: 56px; margin-bottom: 18px; }
+  .success-mark svg { width: 27px; height: 27px; }
+  .booking-success h1 { margin-block: 10px; font-size: 2.15rem; }
+  .booking-success > p { font-size: .78rem; }
+
+  .auth-page { padding-top: 64px; }
+  .auth-image { min-height: 205px; padding: 24px 16px; }
+  .auth-image h1 { margin-block: 10px; font-size: 2.2rem; }
+  .auth-image p { margin: 0; font-size: .76rem; }
+  .auth-panel { padding: 25px 14px 48px; }
+  .auth-tabs { margin-bottom: 24px; }
+  .auth-tabs button { min-height: 42px; }
+  .auth-title { gap: 11px; margin-bottom: 20px; }
+  .auth-title > svg { width: 20px; }
+  .auth-title h2 { font-size: 1.28rem; }
+  .auth-title p { font-size: .75rem; }
+  .auth-box form { gap: 11px; }
+  .auth-box form > label { gap: 5px; font-size: .7rem; }
+  .auth-box input { min-height: 43px; }
+  .password-field > svg { top: 12px; }
+  .password-field button { top: 4px; }
+  .field-hint { font-size: .62rem; }
+  .legal-consent { font-size: .68rem; line-height: 1.45; }
+  .form-message { min-height: 15px; font-size: .7rem; }
+  .auth-submit { min-height: 46px; }
+  .continue-guest { margin-top: 18px; }
+}

@@ -28,8 +28,9 @@ export function BookingPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const navigationState = location.state as { professionalSelected?: boolean; professionalId?: string } | null;
-  const preselectedProfessionalId = navigationState?.professionalId || '';
-  const [skipProfessionalStep, setSkipProfessionalStep] = useState(() => Boolean(navigationState?.professionalSelected && preselectedProfessionalId));
+  const queryProfessionalId = new URLSearchParams(location.search).get('profissional') || '';
+  const preselectedProfessionalId = navigationState?.professionalId || queryProfessionalId;
+  const [skipProfessionalStep, setSkipProfessionalStep] = useState(() => Boolean(preselectedProfessionalId));
 
   useEffect(() => {
     const controller = new AbortController();
@@ -44,6 +45,16 @@ export function BookingPage() {
   useEffect(() => {
     if (user && !booking.customer.name) update({ customer: { ...booking.customer, name: user.name, phone: user.phone || '', email: user.email } });
   }, [user, booking.customer, update]);
+
+  useEffect(() => {
+    if (
+      preselectedProfessionalId
+      && professionals.some((professional) => professional.id === preselectedProfessionalId)
+      && booking.professionalId !== preselectedProfessionalId
+    ) {
+      update({ professionalId: preselectedProfessionalId, date: '', startAt: '' });
+    }
+  }, [preselectedProfessionalId, professionals, booking.professionalId, update]);
 
   const selectedServices = useMemo(() => services.filter((service) => booking.serviceIds.includes(service.id)), [services, booking.serviceIds]);
   const total = useMemo(() => selectedServices.reduce((sum, service) => ({ price: sum.price + service.priceCents, minutes: sum.minutes + service.durationMin }), { price: 0, minutes: 0 }), [selectedServices]);
@@ -115,7 +126,8 @@ export function BookingPage() {
     <div className="booking-content">
       {loading && step === 0 ? <div className="booking-loading"><LoaderCircle className="spin" /><p>Preparando a agenda...</p></div> : error && !services.length ? <div className="booking-error"><h1>Agenda indisponível</h1><p>{error}</p><button className="button" onClick={() => window.location.reload()}>Tentar novamente</button></div> : <>
         {step === 0 && <section className="booking-step"><StepHeading overline="Primeiro passo" title="Escolha seus serviços" text="Você pode combinar mais de um serviço. O tempo e o valor são calculados automaticamente." />
-          <div className="select-services">{services.map((service) => { const selected = booking.serviceIds.includes(service.id); return <button key={service.id} aria-pressed={selected} className={selected ? 'selected' : ''} onClick={() => update({ serviceIds: selected ? booking.serviceIds.filter((id) => id !== service.id) : [...booking.serviceIds, service.id], professionalId: '', date: '', startAt: '' })}>
+          {skipProfessionalStep && selectedProfessional && <div className="preselected-professional"><Check /><span>Profissional escolhido</span><strong>{selectedProfessional.name}</strong></div>}
+          <div className="select-services">{services.map((service) => { const selected = booking.serviceIds.includes(service.id); return <button key={service.id} aria-pressed={selected} className={selected ? 'selected' : ''} onClick={() => update({ serviceIds: selected ? booking.serviceIds.filter((id) => id !== service.id) : [...booking.serviceIds, service.id], professionalId: skipProfessionalStep ? preselectedProfessionalId : '', date: '', startAt: '' })}>
             <span className="selection-check"><img src={serviceIconFor(service.slug)} alt="" aria-hidden="true" />{selected && <Check className="selection-selected-icon" />}</span><div><h3>{service.name}</h3><p>{service.description}</p><small><Clock3 /> {duration(service.durationMin)}</small></div><strong>{currency(service.priceCents)}</strong>
           </button>; })}</div>
         </section>}

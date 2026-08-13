@@ -83,7 +83,9 @@ export function HomePage() {
   const startWithService = (service: Service) => { update({ serviceIds: [service.id], professionalId: '', date: '', startAt: '' }); void navigate('/agendar'); };
   const startWithProfessional = (professional: Professional) => {
     update({ serviceIds: [], professionalId: professional.id, date: '', startAt: '' });
-    void navigate('/agendar', { state: { professionalSelected: true, professionalId: professional.id } });
+    void navigate(`/agendar?profissional=${encodeURIComponent(professional.id)}`, {
+      state: { professionalSelected: true, professionalId: professional.id }
+    });
   };
   const copyProfessionalPhone = async (professional: Professional) => {
     if (!professional.whatsappNumber) return;
