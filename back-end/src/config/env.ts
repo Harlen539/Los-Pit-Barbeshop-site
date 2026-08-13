@@ -1,5 +1,9 @@
 import 'dotenv/config';
 import { z } from 'zod';
+import { normalizeDatabaseUrl } from './database-url.js';
+
+const normalizedDatabaseUrl = normalizeDatabaseUrl(process.env.DATABASE_URL);
+if (normalizedDatabaseUrl) process.env.DATABASE_URL = normalizedDatabaseUrl;
 
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
