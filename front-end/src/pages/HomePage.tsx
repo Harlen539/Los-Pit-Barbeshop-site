@@ -110,7 +110,7 @@ export function HomePage() {
   return <main>
     <section id="inicio" className="hero">
       <div className="hero-glow" /><div className="hero-content wrap">
-        <div className="hero-visual"><picture><source media="(max-width: 720px)" srcSet="/assets/los-pit/hero/hero-team-720.webp" /><img src="/assets/los-pit/hero/hero-team.webp" srcSet="/assets/los-pit/hero/hero-team-720.webp 720w, /assets/los-pit/hero/hero-team.webp 2123w" sizes="100vw" alt="Profissionais da Los Pit Barber Shop" fetchPriority="high" /></picture></div>
+        <div className="hero-visual"><picture><source media="(max-width: 767px)" srcSet="/assets/los-pit/hero/hero-team-mobile.png" /><img src="/assets/los-pit/hero/hero-team.webp" srcSet="/assets/los-pit/hero/hero-team-720.webp 720w, /assets/los-pit/hero/hero-team.webp 2123w" sizes="100vw" alt="Profissionais da Los Pit Barber Shop" fetchPriority="high" /></picture></div>
       </div>
     </section>
 
