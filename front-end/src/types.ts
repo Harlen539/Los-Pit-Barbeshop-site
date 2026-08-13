@@ -1,0 +1,6 @@
+export interface Service { id: string; name: string; slug: string; description: string; durationMin: number; priceCents: number; icon?: string | null; featured: boolean; active: boolean }
+export interface Professional { id: string; name: string; slug: string; bio?: string | null; specialty?: string | null; photoUrl?: string | null; whatsappNumber?: string | null; active: boolean; services: Pick<Service, 'id' | 'name'>[] }
+export interface User { id: string; name: string; email: string; phone?: string | null; birthDate?: string | null; role: 'CLIENT' | 'PROFESSIONAL' | 'ADMIN' }
+export interface AppointmentService { serviceId: string; nameSnapshot: string; priceCents: number; durationMin: number }
+export interface Appointment { id: string; code: string; startAt: string; endAt: string; status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW'; totalCents: number; customerName: string; customerPhone: string; customerEmail?: string | null; notes?: string | null; services: AppointmentService[]; professional: { id: string; name: string; photoUrl?: string | null } }
+export interface Settings { name: string; address?: string | null; phone?: string | null; email?: string | null; instagram?: string | null; openingHours?: unknown; timezone: string }
